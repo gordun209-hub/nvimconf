@@ -65,7 +65,6 @@ end
 
 local function lsp_keymaps(bufnr)
   local opts_keymap = { noremap = true, silent = true }
-
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts_keymap)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts_keymap)
@@ -76,7 +75,7 @@ local function lsp_keymaps(bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "J", "<cmd>lua vim.lsp.buf.hover()<CR>", opts_keymap)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts_keymap)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts_keymap)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts_keymap)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts_keymap)
   vim.api.nvim_buf_set_keymap(
     bufnr,
     "n",
@@ -101,15 +100,19 @@ end
 -------------------------------------------------------------------
 ---  -----------------------------------------------------------------
 M.on_attach = function(client, bufnr)
-  if (client.name == 'tsserver') then
+  if (client.name == 'tsserver' or client.name == 'tailwindcss') then
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
-    client.server_capabilities.document_formatting = false
+    -- client.server_capabilities.document_formatting = false
+  end
+  if (client.name == 'tailwindcss') then
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
   end
   if (client.name == "eslint") then
-    client.server_capabilities.documentRangeFormattingProvider = true
+    -- client.server_capabilities.documentRangeFormattingProvider = true
     client.server_capabilities.documentFormattingProvider = true
-    client.server_capabilities.document_formatting = true
+    --client.server_capabilities.document_formatting = true
   end
   require 'illuminate'.on_attach(client)
   lsp_keymaps(bufnr)
@@ -123,5 +126,8 @@ if not status_ok then
 end
 
 M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+
 return M
+
 --------------------------------------------------------------------
+--

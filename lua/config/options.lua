@@ -2,6 +2,7 @@ local opt = vim.opt
 local options = {
   clipboard = "unnamed,unnamedplus", --- Copy-paste between vim and everything else
   cmdheight = 2, --- Give more space for displaying messages
+  emoji = false,
   completeopt = "menu,menuone,noselect", --- Better autocompletion
   cursorline = false, --- Highlight of current line
   expandtab = true, --- Use spaces instead of tabs
@@ -106,4 +107,4 @@ opt.matchpairs = { "(:)", "{:}", "[:]", "<:>" }
 
 
 
-vim.o.background = "dark"
+--vim.o.background = "dark"

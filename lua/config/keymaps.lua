@@ -6,7 +6,6 @@ local term_opts = { silent = true }
 local keymap = vim.api.nvim_set_keymap
 local new_keymap = vim.keymap.set
 --Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 keymap("n", "H", "^", silent)
@@ -40,24 +39,22 @@ keymap("n", "<C-s>", ":w<CR>", silent)
 keymap("i", "<C-s>", "<ESC> :w<CR>", silent)
 
 ---     Telescope
-keymap("n", ";g", "<CMD>Telescope git_branches<CR>", {})
-keymap("n", ";k", "<CMD>Telescope keymaps<CR>", {})
-keymap("n", ";c", "<CMD>Telescope commands<CR>", {})
-keymap("n", ";p", "<cmd>lua require('telescope').extensions.projects.projects()<cr>", opts)
-keymap("n", ";r", "<cmd>Telescope live_grep theme=ivy<cr>", opts)
-keymap("n", ";;", "<cmd>Telescope help_tags<cr>", opts)
-keymap("n", ";b", "<cmd>Telescope file_browser<cr>", opts)
-
-
+keymap("n", "fg", "<CMD>Telescope git_branches<CR>", {})
+keymap("n", "fk", "<CMD>Telescope keymaps<CR>", {})
+keymap("n", "fc", "<CMD>Telescope commands<CR>", {})
+keymap("n", "fp", "<cmd>lua require('telescope').extensions.projects.projects()<cr>", opts)
+keymap("n", "fl", "<cmd>Telescope live_grep theme=ivy<cr>", opts)
+keymap("n", "fh", "<cmd>Telescope help_tags<cr>", opts)
+keymap("n", "fe", "<cmd>Telescope file_browser<cr>", opts)
 keymap(
   "n",
-  "\\",
+  "fb",
   "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
   opts
 )
 keymap(
   "n",
-  ";f",
+  "ff",
   "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({previewer = false}))<cr>",
   opts
 )
@@ -67,7 +64,7 @@ keymap("n", "<C-Down>", ":resize +2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
--- Navigate buffers
+-- Navigate buffersbuffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
@@ -92,12 +89,12 @@ keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 -- TROUBLE SHORTCUTS
-vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>Trouble loclist<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "gR", "<cmd>Trouble lsp_references<cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>tt", "<cmd>Trouble<cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>tw", "<cmd>Trouble workspace_diagnostics<cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>td", "<cmd>Trouble document_diagnostics<cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>tl", "<cmd>Trouble loclist<cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>tq", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>tr", "<cmd>Trouble lsp_references<cr>", { silent = true, noremap = true })
 
 -- Show package versions
 vim.api.nvim_set_keymap("n", "<leader>ns", ":lua require('package-info').show()<CR>", { silent = true, noremap = true })
@@ -109,7 +106,6 @@ vim.api.nvim_set_keymap("n", "<leader>nc", ":lua require('package-info').hide()<
 
 new_keymap("n", "<Leader>pr", "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", silent)
 new_keymap("v", "<Leader>pr", "<cmd>lua require('spectre').open_visual()<CR>")
-
 -- lir
 keymap("n", "-", "<cmd>:e %:h<cr>", { noremap = true })
 vim.g.loaded_netrw = 1
@@ -117,5 +113,4 @@ vim.g.loaded_netrwPlugin = 1
 vim.cmd("highlight LirDir ctermfg=109")
 
 --COMMENT
-keymap("n", "<space>/,", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)
-keymap("n", "<space>/.", "<cmd>lua require('Comment.api').toggle_current_blockwise()<CR>", opts)
+keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)

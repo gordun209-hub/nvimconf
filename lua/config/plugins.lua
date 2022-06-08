@@ -53,7 +53,7 @@ return packer.startup(function(use)
     end,
   })
   -- which key
-  -- use { 'folke/which-key.nvim', config = "require('config.whichkey')", event = "BufWinEnter" }
+  use { 'folke/which-key.nvim', config = function() require('config.whichkey') end, event = "BufWinEnter" }
   --  syntax highlight
   use({
     "nvim-treesitter/nvim-treesitter",
@@ -61,6 +61,7 @@ return packer.startup(function(use)
     config = "require('config.treesitter')",
     requires = { "plenary.nvim" },
   })
+  -- use({ "EdenEast/nightfox.nvim", config = function() require('colorschemes.nightfox') end })
   -- comments
   use({ "JoosepAlviste/nvim-ts-context-commentstring", after = { "nvim-treesitter" } })
   -- idk what this is
@@ -74,21 +75,39 @@ return packer.startup(function(use)
   --   end,
   --   requires = "nvim-treesitter",
   -- })
-  -- use({'luisiacc/gruvbox-baby', branch= 'main'})
-  use({"sainnhe/gruvbox-material", config = function() require('colorschemes.gruvbox_material') end })
+
+  -- use({ 'rmehri01/onenord.nvim'})
+  use({ 'luisiacc/gruvbox-baby', branch = 'main', config = function() require('colorschemes.gruvbox') end })
+  -- use({ "sainnhe/gruvbox-material"})
   -- best navigation plugin ever
-  use({
+  use {
     "nvim-telescope/telescope.nvim",
-    config = function()
-      require("config.telescope")
-    end,
     requires = {
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-telescope/telescope-fzf-native.nvim" },
-      { "cljoly/telescope-repo.nvim" },
-      { "nvim-telescope/telescope-file-browser.nvim" },
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-project.nvim",
+      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+      "nvim-telescope/telescope-file-browser.nvim"
     },
-  })
+    config = function()
+      require("config.telescope").setup()
+    end,
+  }
+  -- use({
+  --   "nvim-telescope/telescope.nvim",
+  --   config = function()
+  --     require("config.telescope")
+  --   end,
+  --   requires = {
+  --     { "nvim-lua/plenary.nvim" },
+  --     { "nvim-telescope/telescope-fzf-native.nvim" },
+  --     { "cljoly/telescope-repo.nvim" },
+  --     { "nvim-telescope/telescope-file-browser.nvim" },
+  --   },
+  -- })
+
+  -- swiss army of neovim
+
+  use({ 'echasnovski/mini.nvim', config = function() require('mini.surround').setup() end })
 
   -- LSP --
   -- install lsp
@@ -137,7 +156,7 @@ return packer.startup(function(use)
       require('config.copilot')
     end,
   })
-  
+
   use {
     "max397574/better-escape.nvim",
     config = function()
@@ -159,7 +178,7 @@ return packer.startup(function(use)
     config = function() require('config.trouble') end,
     requires = "nvim-web-devicons",
     after = {
-      'nvim-lspconfig',
+      'nvim-lspconfig', 'nvim-lsp-installer'
     },
     cmd = 'Trouble',
   })
@@ -201,16 +220,17 @@ return packer.startup(function(use)
     end,
   })
   -- hawli
-  use({
-    "andweeb/presence.nvim",
-    config = function()
-      require("presence"):setup({ auto_update = true })
-    end,
-  })
+  -- use({
+  --   "andweeb/presence.nvim",
+  --   config = function()
+  --     require("presence"):setup({ auto_update = true })
+  --   end,
+  -- })
   -- json packages for projects
   use({
     "vuki656/package-info.nvim",
     requires = "MunifTanjim/nui.nvim",
+    ft = 'json',
     event = "BufEnter package.json",
     config = function()
       require("config.js-package-manager")
@@ -224,14 +244,14 @@ return packer.startup(function(use)
     end,
     requires = { { "nvim-telescope/telescope.nvim" } },
   })
-  -- top bars
-  use({
-    "romgrk/barbar.nvim",
-    config = function()
-      require("config.barbar")
-    end,
-    requires = "nvim-web-devicons"
-  })
+  -- tabs for workspaces
+  use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons', config = function() require('config.bufferline') end }
+  -- use {
+  --   "nanozuki/tabby.nvim",
+  --   config = require("tabby").setup({
+  --     tabline = require("tabby.presets").active_wins_at_tail,
+  --   })
+  -- }
   -- smooth scroll
   use({
     'karb94/neoscroll.nvim',
@@ -296,7 +316,7 @@ return packer.startup(function(use)
     config = function()
       require("config.lir")
     end,
-    event = 'CursorHold',
+    after = { 'nvim-web-devicons' },
   })
   -- indent blank line
   use({ "lukas-reineke/indent-blankline.nvim", config = function() require('config.indentline') end, after = 'nvim-treesitter', event = 'BufRead', })
@@ -318,4 +338,3 @@ return packer.startup(function(use)
   })
   use({ 'stevearc/dressing.nvim', requires = 'MunifTanjim/nui.nvim', config = function() require("config.dressing") end })
 end)
-

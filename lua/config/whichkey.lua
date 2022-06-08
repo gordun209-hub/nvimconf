@@ -1,4 +1,4 @@
-require'which-key'.setup {
+require 'which-key'.setup {
   plugins = {
     marks = true, -- shows a list of your marks on ' and `
     registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
@@ -44,10 +44,10 @@ require'which-key'.setup {
     align = "left", -- align columns left, center or right
   },
   ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
-  hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, -- hide mapping boilerplate
+  hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
   show_help = true, -- show help message on the command line when the popup is visible
   -- triggers = "auto", -- automatically setup triggers
-  triggers = {"<leader>"}, -- or specify a list manually
+  triggers = { "<leader>" }, -- or specify a list manually
   triggers_blacklist = {
     -- list of mode / prefixes that should never be hooked by WhichKey
     -- this is mostly relevant for key maps that start with a native binding
@@ -68,192 +68,8 @@ local opts = {
 
 local mappings = {
 
-  -- ignore
-  ["1"] = "which_key_ignore",
-  ["2"] = "which_key_ignore",
-  ["3"] = "which_key_ignore",
-  ["4"] = "which_key_ignore",
-  ["5"] = "which_key_ignore",
-  ["6"] = "which_key_ignore",
-  ["7"] = "which_key_ignore",
-  ["8"] = "which_key_ignore",
-  ["9"] = "which_key_ignore",
-
-  -- single
-  ["="] = { '<cmd>vertical resize +5<CR>',               'resize +5' },
-  ["-"] = { '<cmd>vertical resize -5<CR>',               'resize +5' },
-  ["v"] = { '<C-W>v',                                    'split right' },
-  ["V"] = { '<C-W>s',                                    'split below' },
-  ["q"] = { 'quicklist' },
-
-  ["/"] = {
-    name = "Dashboard",
-    ["/"] = { '<cmd>Dashboard<CR>',                        'open dashboard' },
-    ["c"] = { ':e $MYVIMRC<CR>',                           'open init' },
-    ["s"] = { '<cmd>PackerSync<CR>',                       'packer sync' },
-    ["i"] = { '<cmd>PackerInstall<CR>',                    'packer install' },
-    ["l"] = { '<cmd>SessionManager load_last_session<CR>', 'load last session' },
-  },
-
-  a = {
-    name = "Actions",
-    n = { '<cmd>set nonumber!<CR>',                      'line numbers' },
-    r = { '<cmd>set norelativenumber!<CR>',              'relative number' },
-    t = { '<cmd>ToggleTerm direction=float<CR>',         'terminal float' },
-  },
-
-  b = {
-    name = "Buffer",
-    b = { '<cmd>BufferMovePrevious<CR>',                 'Move back' },
-    c = { '<cmd>BufferCloseAllButCurrent<CR>',           'Close but current' },
-    d = { '<cmd>BufferOrderByDirectory<CR>',             'Order by directory' },
-    f = { '<cmd>bfirst<CR>',                             'First buffer' },
-    l = { '<cmd>BufferCloseBuffersLeft<CR>',             'Close Left' },
-    r = { '<cmd>BufferCloseBuffersRight<CR>',            'Close Right' },
-    n = { '<cmd>BufferMoveNext<CR>',                     'Move next' },
-    p = { '<cmd>BufferPick<CR>',                         'Pick Buffer' },
-  },
-
-  c = {
-    name = "LSP",
-    a = { 'code action' },
-    d = { '<cmd>TroubleToggle<CR>',                      'local diagnostics' },
-    D = { '<cmd>Telescope diagnostics<CR>',              'workspace diagnostics' },
-    f = { 'format' },
-    l = { 'line diagnostics' },
-    r = { 'rename' },
-    t = { '<cmd>LspToggleAutoFormat<CR>',                'toggle format on save' },
-  },
-
-  d = {
-    name = "Debug",
-    a = { 'attach' },
-    b = { 'breakpoint' },
-    c = { 'continue' },
-    d = { 'continue' },
-    h = { 'visual hover' },
-    i = { 'step into' },
-    o = { 'step over' },
-    O = { 'step out' },
-    s = { 'scopes' },
-  },
-
-  g = {
-    name = "Git",
-    a = { '<cmd>!git add %:p<CR>',                                   'add current' },
-    A = { '<cmd>!git add .<CR>',                                     'add all' },
-    b = { '<cmd>lua require("blame").open()<CR>',                    'blame' },
-    B = { '<cmd>Telescope git_branches<CR>',                         'branches' },
-    d = { '<cmd>lua require("plugins.diffview").toggle()<CR>',       'diff file' },
-    g = { 'lazygit' },
-    h = {
-      name = "Hunk",
-      d = "diff hunk",
-      p = "preview",
-      R = "reset buffer",
-      r = "reset hunk",
-      s = "stage hunk",
-      S = "stage buffer",
-      t = "toggle deleted",
-      u = "undo stage",
-    },
-    l = {
-      name = "Log",
-      a = "commits",
-      c = "buffer commits",
-    },
-    m = { 'blame line' },
-    s = { '<cmd>Telescope git_status<CR>',                           'status' },
-  },
-
-  p = {
-    name = "Project",
-    f = { 'file' },
-    w = { 'word' },
-    l = { "<cmd>lua require'telescope'.extensions.repo.list{file_ignore_patterns={'/%.cache/', '/%.cargo/', '/%.local/', '/%timeshift/', '/usr/', '/srv/', '/%.oh%-my%-zsh'}}<CR>", 'list' },
-    r = { 'refactor' },
-    s = { "<cmd>SessionManager save_current_session<CR>",            'save session' },
-    t = { "<cmd>TodoTrouble<CR>",                                    'todo' },
-  },
-
-  s = {
-    name = "Search",
-    c = { '<cmd>Telescope colorscheme<CR>',                          'color schemes' },
-    d = { '<cmd>lua require("plugins.telescope").edit_neovim()<CR>', 'dotfiles' },
-    h = { '<cmd>Telescope oldfiles<CR>',                             'file history' },
-    H = { '<cmd>Telescope command_history<CR>',                      'command history' },
-    s = { '<cmd>Telescope search_history<CR>',                       'search history' },
-  },
-
-  t = {
-    name = "Table Mode",
-    m = { 'toggle' },
-    t = { 'tableize' },
-  },
 }
 
 local wk = require "which-key"
 wk.register(mappings, opts)
 
-local function attach_markdown(bufnr)
-  wk.register({
-    a = {
-      name = "Actions",
-      m = { '<cmd>MarkdownPreviewToggle<CR>', 'markdown preview' },
-    }
-  }, {
-    buffer = bufnr ,
-    mode = "n", -- NORMAL mode
-    prefix = "<leader>",
-    silent = true, -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = false, -- use `nowait` when creating keymaps
-  })
-end
-
-local function attach_typescript(bufnr)
-  wk.register({
-    c = {
-      name = "LSP",
-      F = { '<cmd>TypescriptFixAll<CR>',                   'fix all' },
-      i = { '<cmd>TypescriptAddMissingImports<CR>',        'import all'},
-      o = { '<cmd>TypescriptOrganizeImports<CR>',          'organize imports'},
-      u = { '<cmd>TypescriptRemoveUnused<CR>',             'remove unused' },
-    }
-  }, {
-    buffer = bufnr ,
-    mode = "n", -- NORMAL mode
-    prefix = "<leader>",
-    silent = true, -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = false, -- use `nowait` when creating keymaps
-  })
-end
-
-local function attach_npm(bufnr)
-  wk.register({
-    n = {
-      name = "NPM",
-      c = { '<cmd>lua require("package-info").change_version()<CR>', 'change version' },
-      d = { '<cmd>lua require("package-info").delete()<CR>',         'delete package' },
-      h = { "<cmd>lua require('package-info').hide()<CR>",           'hide'},
-      i = { '<cmd>lua require("package-info").install()<CR>',        'install new package' },
-      r = { '<cmd>lua require("package-info").reinstall()<CR>',      'reinstall dependencies' },
-      s = { '<cmd>lua require("package-info").show()<CR>',           'show' },
-      u = { '<cmd>lua require("package-info").update()<CR>',         'update package'},
-    }
-  }, {
-    buffer = bufnr ,
-    mode = "n", -- NORMAL mode
-    prefix = "<leader>",
-    silent = true, -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = false, -- use `nowait` when creating keymaps
-  })
-end
-
-return {
-  attach_markdown = attach_markdown,
-  attach_typescript = attach_typescript,
-  attach_npm = attach_npm
-}
