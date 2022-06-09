@@ -51,6 +51,7 @@ return packer.startup(function(use)
     config = function()
       require("config.devicons")
     end,
+    event = "VimEnter"
   })
   -- which key
   use { 'folke/which-key.nvim', config = function() require('config.whichkey') end, event = "BufWinEnter" }
@@ -61,24 +62,14 @@ return packer.startup(function(use)
     config = "require('config.treesitter')",
     requires = { "plenary.nvim" },
   })
-  -- use({ "EdenEast/nightfox.nvim", config = function() require('colorschemes.nightfox') end })
+  use({ 'shaunsingh/nord.nvim', config = function() require('colorschemes.nord') end })
+
   -- comments
   use({ "JoosepAlviste/nvim-ts-context-commentstring", after = { "nvim-treesitter" } })
   -- idk what this is
   use { 'nvim-treesitter/nvim-treesitter-textobjects', after = { 'nvim-treesitter' } }
   -- -- THEMES --
-  -- best theme
-  -- use({
-  --   "folke/tokyonight.nvim",
-  --   config = function()
-  --     require("colorschemes.tokyonight")
-  --   end,
-  --   requires = "nvim-treesitter",
-  -- })
 
-  -- use({ 'rmehri01/onenord.nvim'})
-  use({ 'luisiacc/gruvbox-baby', branch = 'main', config = function() require('colorschemes.gruvbox') end })
-  -- use({ "sainnhe/gruvbox-material"})
   -- best navigation plugin ever
   use {
     "nvim-telescope/telescope.nvim",
@@ -92,19 +83,6 @@ return packer.startup(function(use)
       require("config.telescope").setup()
     end,
   }
-  -- use({
-  --   "nvim-telescope/telescope.nvim",
-  --   config = function()
-  --     require("config.telescope")
-  --   end,
-  --   requires = {
-  --     { "nvim-lua/plenary.nvim" },
-  --     { "nvim-telescope/telescope-fzf-native.nvim" },
-  --     { "cljoly/telescope-repo.nvim" },
-  --     { "nvim-telescope/telescope-file-browser.nvim" },
-  --   },
-  -- })
-
   -- swiss army of neovim
 
   use({ 'echasnovski/mini.nvim', config = function() require('mini.surround').setup() end })
@@ -118,15 +96,12 @@ return packer.startup(function(use)
     config = function()
       require("lsp")
     end,
+    event = "VimEnter"
   })
 
   -- auto closing tags
   use({ "windwp/nvim-ts-autotag", requires = { "nvim-treesitter" } })
   -- lsp configuration schemas
-  use({
-    "b0o/SchemaStore.nvim",
-    after = "nvim-lspconfig",
-  })
   -- autocomplete
   use({
     "hrsh7th/nvim-cmp",
@@ -146,7 +121,7 @@ return packer.startup(function(use)
   })
 
   -- snippets
-  use { 'L3MON4D3/LuaSnip', requires = { 'rafamadriz/friendly-snippets' }, after = 'cmp_luasnip' }
+  use { 'L3MON4D3/LuaSnip', requires = { 'rafamadriz/friendly-snippets' }, after = 'cmp_luasnip', wants = "friendly-snippets", }
   -- copilot but autocomplete
   -- copilot but lua
   -- github copilot for autocomplete
@@ -156,22 +131,6 @@ return packer.startup(function(use)
       require('config.copilot')
     end,
   })
-
-  use {
-    "max397574/better-escape.nvim",
-    config = function()
-      require("better_escape").setup {
-        mapping = { "jk", "jj" }, -- a table with mappings to use
-        timeout = vim.o.timeoutlen, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
-        clear_empty_lines = false, -- clear line after escaping if there is only whitespace
-        keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
-        -- example(recommended)
-        -- keys = function()
-        --   return vim.api.nvim_win_get_cursor(0)[2] > 1 and '<esc>l' or '<esc>'
-        -- end,
-      }
-    end,
-  }
   -- displays errors noice
   use({
     "folke/trouble.nvim",
@@ -219,23 +178,16 @@ return packer.startup(function(use)
       require("config.notify").config()
     end,
   })
-  -- hawli
+  -- json packages for projects
   -- use({
-  --   "andweeb/presence.nvim",
+  --   "vuki656/package-info.nvim",
+  --   requires = "MunifTanjim/nui.nvim",
+  --   ft = 'json',
+  --   event = "BufEnter package.json",
   --   config = function()
-  --     require("presence"):setup({ auto_update = true })
+  --     require("config.js-package-manager")
   --   end,
   -- })
-  -- json packages for projects
-  use({
-    "vuki656/package-info.nvim",
-    requires = "MunifTanjim/nui.nvim",
-    ft = 'json',
-    event = "BufEnter package.json",
-    config = function()
-      require("config.js-package-manager")
-    end,
-  })
   -- project manager
   use({
     "ahmedkhalf/project.nvim",
@@ -246,12 +198,6 @@ return packer.startup(function(use)
   })
   -- tabs for workspaces
   use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons', config = function() require('config.bufferline') end }
-  -- use {
-  --   "nanozuki/tabby.nvim",
-  --   config = require("tabby").setup({
-  --     tabline = require("tabby.presets").active_wins_at_tail,
-  --   })
-  -- }
   -- smooth scroll
   use({
     'karb94/neoscroll.nvim',
@@ -262,7 +208,6 @@ return packer.startup(function(use)
   })
   use({
     "norcalli/nvim-colorizer.lua",
-    event = 'CursorHold',
     config = function()
       require("colorizer").setup(
         { '*'; },
@@ -282,6 +227,7 @@ return packer.startup(function(use)
       )
     end,
     after = "nvim-treesitter",
+    event = { "BufRead", "BufNewFile" }
   })
 
   use({
@@ -331,6 +277,7 @@ return packer.startup(function(use)
   })
   -- ts special
   use { 'jose-elias-alvarez/typescript.nvim' }
+  use {"Djancyp/cheat-sheet"}
   use({
     -- calc startup time
     "dstein64/vim-startuptime",

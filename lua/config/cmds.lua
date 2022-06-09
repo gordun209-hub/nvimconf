@@ -19,11 +19,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 })
 --
--- vim.api.nvim_create_autocmd({ "VimEnter" }, {
---   callback = function()
---     vim.cmd "hi link illuminatedWord LspReferenceText"
---   end,
--- })
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+  callback = function()
+    vim.cmd "hi link illuminatedWord LspReferenceText"
+  end,
+})
 -- -- for cursor options
 -- --
 -- vim.api.nvim_create_autocmd("InsertEnter", {

@@ -61,6 +61,16 @@ M.setup = function()
     },
   })
 end
+local function lsp_highlight_document(client)
+  -- if client.server_capabilities.document_highlight then
+  local status_ok, illuminate = pcall(require, "illuminate")
+  if not status_ok then
+    print('laa')
+    return
+  end
+  illuminate.on_attach(client)
+end
+
 -----------------------------------------------------------------
 
 local function lsp_keymaps(bufnr)
@@ -103,18 +113,15 @@ M.on_attach = function(client, bufnr)
   if (client.name == 'tsserver' or client.name == 'tailwindcss') then
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
-    -- client.server_capabilities.document_formatting = false
   end
   if (client.name == 'tailwindcss') then
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
   end
   if (client.name == "eslint") then
-    -- client.server_capabilities.documentRangeFormattingProvider = true
     client.server_capabilities.documentFormattingProvider = true
-    --client.server_capabilities.document_formatting = true
   end
-  require 'illuminate'.on_attach(client)
+  lsp_highlight_document(client)
   lsp_keymaps(bufnr)
 end
 

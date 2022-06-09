@@ -47,6 +47,7 @@ lspconfig.jsonls.setup {
 lspconfig.sumneko_lua.setup {
   on_attach = on_attach,
   settings = require('lsp.settings.sumneko-lua').settings,
+  capabilities = capabilities
 }
 
 lspconfig.html.setup {
