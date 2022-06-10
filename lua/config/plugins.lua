@@ -132,7 +132,7 @@ return packer.startup(function(use)
     end,
   })
   -- displays errors noice
-  use({
+ use({
     "folke/trouble.nvim",
     config = function() require('config.trouble') end,
     requires = "nvim-web-devicons",
@@ -165,19 +165,19 @@ return packer.startup(function(use)
     event = 'BufEnter',
   })
   -- signature
-  use {
-    'ray-x/lsp_signature.nvim',
-    event = 'CursorHold',
-    after = 'nvim-lspconfig',
-    config = function() require('config.lsp-signature') end
-  }
+  -- use {
+  --   'ray-x/lsp_signature.nvim',
+  --   event = 'CursorHold',
+  --   after = 'nvim-lspconfig',
+  --   config = function() require('config.lsp-signature') end
+  -- }
   -- pretty notifications
-  use({
-    "rcarriga/nvim-notify",
-    config = function()
-      require("config.notify").config()
-    end,
-  })
+  -- use({
+  --   "rcarriga/nvim-notify",
+  --   config = function()
+  --     require("config.notify").config()
+  --   end,
+  -- })
   -- json packages for projects
   -- use({
   --   "vuki656/package-info.nvim",
@@ -277,7 +277,7 @@ return packer.startup(function(use)
   })
   -- ts special
   use { 'jose-elias-alvarez/typescript.nvim' }
-  use {"Djancyp/cheat-sheet"}
+  -- use {"Djancyp/cheat-sheet"}
   use({
     -- calc startup time
     "dstein64/vim-startuptime",
