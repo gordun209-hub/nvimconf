@@ -9,7 +9,7 @@ lsp.jsonls.setup({
   end,
   settings = {
     json = {
-      validate = { enable = true },
+     validate = { enable = true },
       schemas = require('schemastore').json.schemas(),
     },
   },

@@ -70,7 +70,6 @@ lspconfig.bashls.setup {
   settings = require('lsp.settings.bashls').settings
 }
 
-
 require('lsp.settings.rust').setup(on_attach, capabilities)
 
 lspconfig.prismals.setup {

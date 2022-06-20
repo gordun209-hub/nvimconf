@@ -110,6 +110,14 @@ return packer.startup(function(use)
   use { 'jose-elias-alvarez/typescript.nvim' }
 
   use({ 'simrat39/rust-tools.nvim' })
+  use {
+    'saecki/crates.nvim',
+    tag = 'v0.2.1',
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require('crates').setup()
+    end,
+  }
   -- auto closing tags
   use({ "windwp/nvim-ts-autotag", requires = { "nvim-treesitter" } })
   -- lsp configuration schemas
@@ -185,12 +193,10 @@ return packer.startup(function(use)
     event = 'BufEnter',
   })
   -- signature
-  use {
-    'ray-x/lsp_signature.nvim',
-    event = 'CursorHold',
-    after = 'nvim-lspconfig',
-    config = function() require('config.lsp-signature') end
-  }
+  -- use {
+  --   'ray-x/lsp_signature.nvim',
+  --   config = function() require('config.lsp-signature') end
+  -- }
   -- pretty notifications
   use({
     "rcarriga/nvim-notify",
