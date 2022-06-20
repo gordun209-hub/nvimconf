@@ -31,18 +31,21 @@ typescript.setup({
 })
 
 lspconfig.eslint.setup {
+  -- this line is new
+  root_dir = lspconfig.util.root_pattern(
+    '.eslintrc.js',
+    '.eslintrc.cjs',
+    '.eslintrc.yaml',
+    '.eslintrc.yml',
+    '.eslintrc.json'
+  ),
   capabilities = capabilities,
   on_attach = on_attach,
   settings = require('lsp.settings.eslint').settings,
   handlers = handlers
 }
 
-
-lspconfig.jsonls.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  settings = require('lsp.settings.jsonls').settings,
-}
+require('lsp.settings.jsonls')
 
 lspconfig.sumneko_lua.setup {
   on_attach = on_attach,
@@ -67,6 +70,8 @@ lspconfig.bashls.setup {
   settings = require('lsp.settings.bashls').settings
 }
 
+
+require('lsp.settings.rust').setup(on_attach, capabilities)
 
 lspconfig.prismals.setup {
   capabilities = capabilities,

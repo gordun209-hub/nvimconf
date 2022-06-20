@@ -43,6 +43,11 @@ return packer.startup(function(use)
   use({
     "lewis6991/impatient.nvim",
   })
+  -- hawli
+  use({ 'andweeb/presence.nvim', config = function() require("presence"):setup({
+      auto_update = true,
+    })
+  end })
   -- needed for other plugins to work
   use({ "nvim-lua/plenary.nvim" })
   -- icons for other plugins
@@ -85,7 +90,7 @@ return packer.startup(function(use)
   }
   -- swiss army of neovim
 
-  use({ 'echasnovski/mini.nvim', config = function() require('mini.surround').setup() end })
+  -- use({ 'echasnovski/mini.nvim', config = function() require('mini.surround').setup() end })
 
   -- LSP --
   -- install lsp
@@ -98,7 +103,13 @@ return packer.startup(function(use)
     end,
     event = "VimEnter"
   })
+  use({ "jose-elias-alvarez/null-ls.nvim", config = function() require('lsp.null-ls') end })
 
+  use({ "b0o/schemastore.nvim" })
+
+  use { 'jose-elias-alvarez/typescript.nvim' }
+
+  use({ 'simrat39/rust-tools.nvim' })
   -- auto closing tags
   use({ "windwp/nvim-ts-autotag", requires = { "nvim-treesitter" } })
   -- lsp configuration schemas
@@ -131,8 +142,15 @@ return packer.startup(function(use)
       require('config.copilot')
     end,
   })
+  -- UI PART OF PLUGINS
+  -- indent line
+  use({ "lukas-reineke/indent-blankline.nvim", config = function() require('config.indentline') end, after = 'nvim-treesitter', event = 'BufRead', })
+
+  -- bufferline
+  use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons', config = function() require('config.bufferline') end }
+
   -- displays errors noice
- use({
+  use({
     "folke/trouble.nvim",
     config = function() require('config.trouble') end,
     requires = "nvim-web-devicons",
@@ -141,6 +159,8 @@ return packer.startup(function(use)
     },
     cmd = 'Trouble',
   })
+  -- pretty ui
+  use({ 'stevearc/dressing.nvim', requires = 'MunifTanjim/nui.nvim', config = function() require("config.dressing") end })
 
   -- autopairs for jsx
   use({
@@ -153,7 +173,7 @@ return packer.startup(function(use)
   use { 'p00f/nvim-ts-rainbow', after = { 'nvim-treesitter' } }
 
   -- rename globally
-  use({ 'nvim-pack/nvim-spectre', after = "plenary.nvim" })
+  -- use({ 'nvim-pack/nvim-spectre', after = "plenary.nvim" })
 
   -- statusline
   use({
@@ -165,47 +185,21 @@ return packer.startup(function(use)
     event = 'BufEnter',
   })
   -- signature
-  -- use {
-  --   'ray-x/lsp_signature.nvim',
-  --   event = 'CursorHold',
-  --   after = 'nvim-lspconfig',
-  --   config = function() require('config.lsp-signature') end
-  -- }
+  use {
+    'ray-x/lsp_signature.nvim',
+    event = 'CursorHold',
+    after = 'nvim-lspconfig',
+    config = function() require('config.lsp-signature') end
+  }
   -- pretty notifications
-  -- use({
-  --   "rcarriga/nvim-notify",
-  --   config = function()
-  --     require("config.notify").config()
-  --   end,
-  -- })
-  -- json packages for projects
-  -- use({
-  --   "vuki656/package-info.nvim",
-  --   requires = "MunifTanjim/nui.nvim",
-  --   ft = 'json',
-  --   event = "BufEnter package.json",
-  --   config = function()
-  --     require("config.js-package-manager")
-  --   end,
-  -- })
-  -- project manager
   use({
-    "ahmedkhalf/project.nvim",
+    "rcarriga/nvim-notify",
     config = function()
-      require("config.project-manager")
+      require("config.notify").config()
     end,
-    requires = { { "nvim-telescope/telescope.nvim" } },
   })
   -- tabs for workspaces
-  use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons', config = function() require('config.bufferline') end }
   -- smooth scroll
-  use({
-    'karb94/neoscroll.nvim',
-    event = 'WinScrolled',
-    config = function()
-      require('neoscroll').setup({ hide_cursor = false })
-    end,
-  })
   use({
     "norcalli/nvim-colorizer.lua",
     config = function()
@@ -229,7 +223,15 @@ return packer.startup(function(use)
     after = "nvim-treesitter",
     event = { "BufRead", "BufNewFile" }
   })
-
+  -- project manager
+  use({
+    "ahmedkhalf/project.nvim",
+    config = function()
+      require("config.project-manager")
+    end,
+    requires = { { "nvim-telescope/telescope.nvim" } },
+  })
+  -- tmux navigation
   use({
     "aserowy/tmux.nvim",
     config = function()
@@ -254,7 +256,6 @@ return packer.startup(function(use)
   })
 
   --highlight words
-
   use({ "RRethy/vim-illuminate", config = function() require('config.illuminate') end })
   -- navigation
   use({
@@ -264,8 +265,6 @@ return packer.startup(function(use)
     end,
     after = { 'nvim-web-devicons' },
   })
-  -- indent blank line
-  use({ "lukas-reineke/indent-blankline.nvim", config = function() require('config.indentline') end, after = 'nvim-treesitter', event = 'BufRead', })
   --commenting
   use({
     "numToStr/Comment.nvim",
@@ -275,13 +274,10 @@ return packer.startup(function(use)
     requires = "joosepalviste/nvim-ts-context-commentstring",
     event = 'BufWinEnter',
   })
-  -- ts special
-  use { 'jose-elias-alvarez/typescript.nvim' }
-  -- use {"Djancyp/cheat-sheet"}
-  use({
-    -- calc startup time
-    "dstein64/vim-startuptime",
-    cmd = "StartupTime",
-  })
-  use({ 'stevearc/dressing.nvim', requires = 'MunifTanjim/nui.nvim', config = function() require("config.dressing") end })
+  -- use({
+  --   -- calc startup time
+  --   "dstein64/vim-startuptime",
+  --   cmd = "StartupTime",
+  -- })
+
 end)

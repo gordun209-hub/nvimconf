@@ -39,22 +39,22 @@ keymap("n", "<C-s>", ":w<CR>", silent)
 keymap("i", "<C-s>", "<ESC> :w<CR>", silent)
 
 ---     Telescope
-keymap("n", "fg", "<CMD>Telescope git_branches<CR>", {})
-keymap("n", "fk", "<CMD>Telescope keymaps<CR>", {})
-keymap("n", "fc", "<CMD>Telescope commands<CR>", {})
-keymap("n", "fp", "<cmd>lua require('telescope').extensions.projects.projects()<cr>", opts)
-keymap("n", "fl", "<cmd>Telescope live_grep theme=ivy<cr>", opts)
-keymap("n", "fh", "<cmd>Telescope help_tags<cr>", opts)
-keymap("n", "fe", "<cmd>Telescope file_browser<cr>", opts)
+keymap("n", "<leader>fg", "<CMD>Telescope git_branches<CR>", {})
+keymap("n", "<leader>fk", "<CMD>Telescope keymaps<CR>", {})
+keymap("n", "<leader>fc", "<CMD>Telescope commands<CR>", {})
+keymap("n", "<leader>fp", "<cmd>lua require('telescope').extensions.projects.projects()<cr>", opts)
+keymap("n", "<leader>fl", "<cmd>Telescope live_grep theme=ivy<cr>", opts)
+keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", opts)
+keymap("n", "<leader>fe", "<cmd>Telescope file_browser<cr>", opts)
 keymap(
   "n",
-  "fb",
+  "<leader>fb",
   "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
   opts
 )
 keymap(
   "n",
-  "ff",
+  "<leader>ff",
   "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({previewer = false}))<cr>",
   opts
 )
@@ -111,6 +111,4 @@ keymap("n", "-", "<cmd>:e %:h<cr>", { noremap = true })
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.cmd("highlight LirDir ctermfg=109")
-
---COMMENT
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)
