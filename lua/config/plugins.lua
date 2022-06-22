@@ -67,14 +67,15 @@ return packer.startup(function(use)
     config = "require('config.treesitter')",
     requires = { "plenary.nvim" },
   })
-  use({ 'shaunsingh/nord.nvim', config = function() require('colorschemes.nord') end })
 
   -- comments
   use({ "JoosepAlviste/nvim-ts-context-commentstring", after = { "nvim-treesitter" } })
   -- idk what this is
   use { 'nvim-treesitter/nvim-treesitter-textobjects', after = { 'nvim-treesitter' } }
   -- -- THEMES --
-
+  -- use({"sainnhe/sonokai"})
+  use({ "rebelot/kanagawa.nvim", config = function() require('colorschemes.kanagawa') end })
+  -- use({ 'shaunsingh/nord.nvim', config = function() require('colorschemes.nord') end })
   -- best navigation plugin ever
   use {
     "nvim-telescope/telescope.nvim",
@@ -105,7 +106,7 @@ return packer.startup(function(use)
   })
   use({ "jose-elias-alvarez/null-ls.nvim", config = function() require('lsp.null-ls') end })
 
-  use({ "b0o/schemastore.nvim" })
+  use({ "b0o/schemastore.nvim", config = function() require('lsp.settings.jsonls') end })
 
   use { 'jose-elias-alvarez/typescript.nvim' }
 
@@ -138,7 +139,13 @@ return packer.startup(function(use)
       { "David-Kunz/cmp-npm", requires = "nvim-lua/plenary.nvim", config = function() require('config.cmp-npm') end }
     },
   })
-
+  -- terminal
+  use({
+    "akinsho/nvim-toggleterm.lua",
+    config = function()
+      require("config.terminal").setup()
+    end,
+  })
   -- snippets
   use { 'L3MON4D3/LuaSnip', requires = { 'rafamadriz/friendly-snippets' }, after = 'cmp_luasnip', wants = "friendly-snippets", }
   -- copilot but autocomplete
@@ -184,11 +191,12 @@ return packer.startup(function(use)
   -- use({ 'nvim-pack/nvim-spectre', after = "plenary.nvim" })
 
   -- statusline
+  -- use({ 'feline-nvim/feline.nvim', config = function() require('config.feline') end })
   use({
     "nvim-lualine/lualine.nvim",
     requires = "kyazdani42/nvim-web-devicons",
     config = function()
-      require("config.lualine")
+      require("config.lualine").setup()
     end,
     event = 'BufEnter',
   })
@@ -198,6 +206,7 @@ return packer.startup(function(use)
   --   config = function() require('config.lsp-signature') end
   -- }
   -- pretty notifications
+
   use({
     "rcarriga/nvim-notify",
     config = function()
@@ -280,6 +289,8 @@ return packer.startup(function(use)
     requires = "joosepalviste/nvim-ts-context-commentstring",
     event = 'BufWinEnter',
   })
+    use { 'ChristianChiarulli/nvim-gps', branch = 'text_hl', config = "require('config.gps')", after = 'nvim-treesitter' }
+      -- use { 'ecosse3/galaxyline.nvim', after = 'nvim-gps', config = "require('config.galaxyline')", event = "BufWinEnter" }
   -- use({
   --   -- calc startup time
   --   "dstein64/vim-startuptime",

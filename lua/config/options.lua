@@ -6,9 +6,9 @@ local options = {
   completeopt = "menu,menuone,noselect", --- Better autocompletion
   cursorline = false, --- Highlight of current line
   expandtab = true, --- Use spaces instead of tabs
-  -- shell = "/bin/zsh",
+ shell = "/bin/zsh",
   foldlevelstart = 99, --- Expand all folds by default
-  foldtext = "CustomFold()", --- Emit custom function for foldtext
+
   ignorecase = true, --- Needed for smartcase
   laststatus = 3, --- Have a global statusline at the bottom instead of one for each window
   lazyredraw = true, --- Makes macros faster & prevent errors in complicated mappings
@@ -84,7 +84,7 @@ vim.g.loaded_netrwFileHandlers = 1
 -- indention
 
 -- search
-opt.wildignore = opt.wildignore + { "*/node_modules/*", "*/.git/*", "*/vendor/*", "*node_modules/**" }
+opt.wildignore = opt.wildignore + { "*/node_modules/*", "*/target/*","*/.git/*", "*/vendor/*", "*node_modules/**" }
 opt.wildmenu = true
 
 -- ui

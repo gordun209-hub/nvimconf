@@ -1,4 +1,3 @@
--- Requires
 
 
 local cmp_status_ok, cmp = pcall(require, "cmp")
