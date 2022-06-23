@@ -3,6 +3,7 @@ local status_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
 if not status_ok then
     return
 end
+vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false})]]
 -- setup here and import init.lua
 lsp_installer.setup({
 

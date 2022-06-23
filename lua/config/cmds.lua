@@ -1,5 +1,5 @@
 -- Disable diagnostics in node_modules (0 is current buffer only)
-
+local autocmd = vim.api.nvim_create_autocmd
 vim.api.nvim_create_autocmd("BufRead", { pattern = "*/node_modules/*", command = "lua vim.diagnostic.disable(0)" })
 vim.api.nvim_create_autocmd("BufNewFile", { pattern = "*/node_modules/*", command = "lua vim.diagnostic.disable(0)" })
 local highlight_group = vim.api.nvim_create_augroup("Highlight", { clear = true })
@@ -17,6 +17,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   command = "EslintFixAll",
   group = highlight_group,
 
+})
+
+autocmd('BufEnter', {
+    desc = 'Do not auto comment on new line',
+    command = 'set fo-=c fo-=r fo-=o',
 })
 --
 -- vim.api.nvim_create_autocmd({ "VimEnter" }, {
