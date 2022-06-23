@@ -35,11 +35,12 @@ M.setup = function()
         underline = true,
         severity_sort = true,
         float = {
-
             focusable = false,
             style = "minimal",
             border = "rounded",
             source = "always",
+            header = "",
+            prefix = "",
         },
     }
 
@@ -106,7 +107,7 @@ M.on_attach = function(client, bufnr)
     if (client.name == 'tsserver' or client.name == 'tailwindcss') then
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
-    end
+    end event = 'BufEnter'
     if (client.name == 'tailwindcss') then
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false

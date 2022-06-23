@@ -47,7 +47,7 @@ return packer.startup(function(use)
     use({ 'andweeb/presence.nvim', config = function() require("presence"):setup({
             auto_update = true,
         })
-    end })
+    end, event = "BufWinEnter" })
     -- needed for other plugins to work
     use({ "nvim-lua/plenary.nvim" })
     -- icons for other plugins
@@ -201,17 +201,18 @@ return packer.startup(function(use)
         event = 'BufEnter',
     })
     -- signature
-    -- use {
-    --   'ray-x/lsp_signature.nvim',
-    --   config = function() require('config.lsp-signature') end
-    -- }
+    use {
+        'ray-x/lsp_signature.nvim',
+        config = function() require('lsp.lsp-signatures') end,
+        after = 'nvim-lspconfig'
+    }
     -- pretty notifications
 
     use({
         "rcarriga/nvim-notify",
         config = function()
             require("config.notify").config()
-        end,
+        end, event = "BufEnter"
     })
     -- tabs for workspaces
     -- smooth scroll

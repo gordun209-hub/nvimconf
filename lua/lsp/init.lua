@@ -2,7 +2,7 @@ local typescript_ok, typescript = pcall(require, 'typescript')
 require("lsp.lsp-installer") -- this installs servers
 require("lsp.handlers").setup() -- this exposes handlers
 local lspconfig = require("lspconfig")
-require("lsp.lsp-signatures")
+--require("lsp.lsp-signatures")
 
 local on_attach = require('lsp.handlers').on_attach
 local capabilities = require('lsp.handlers').capabilities
