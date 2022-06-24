@@ -71,3 +71,10 @@ lspconfig.prismals.setup {
     capabilities = capabilities,
     on_attach = on_attach,
 }
+
+lspconfig.racket_langserver.setup {
+    filetypes = { "racket", "scheme" },
+    root_dir = lspconfig.util.root_pattern(".git", "."),
+    capabilities = capabilities,
+    on_attach = on_attach,
+}

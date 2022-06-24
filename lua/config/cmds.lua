@@ -19,6 +19,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 })
 
+vim.api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost" }, {
+  callback = function()
+    require("config.winbar").get_winbar()
+  end,
+})
 autocmd('BufEnter', {
     desc = 'Do not auto comment on new line',
     command = 'set fo-=c fo-=r fo-=o',

@@ -196,7 +196,7 @@ return packer.startup(function(use)
         "nvim-lualine/lualine.nvim",
         requires = "kyazdani42/nvim-web-devicons",
         config = function()
-            require("config.lualine").setup()
+            require("config.lualine")
         end,
         event = 'BufEnter',
     })
@@ -219,24 +219,8 @@ return packer.startup(function(use)
     use({
         "norcalli/nvim-colorizer.lua",
         config = function()
-            require("colorizer").setup(
-                { '*'; },
-                {
-                    RGB      = true; -- #RGB hex codes
-                    RRGGBB   = true; -- #RRGGBB hex codes
-                    names    = true; -- "Name" codes like Blue or blue
-                    RRGGBBAA = true; -- #RRGGBBAA hex codes
-                    rgb_fn   = true; -- CSS rgb() and rgba() functions
-                    hsl_fn   = true; -- CSS hsl() and hsla() functions
-                    css      = true; -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-                    css_fn   = true; -- Enable all CSS *functions*: rgb_fn, hsl_fn
-
-                    -- Available modes: foreground, background, virtualtext
-                    mode = 'background'
-                }
-            )
-        end,
-        after = "nvim-treesitter",
+            require("config.colorizer")
+        end, after = "nvim-treesitter",
         event = { "BufRead", "BufNewFile" }
     })
     -- project manager
