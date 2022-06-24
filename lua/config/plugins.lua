@@ -135,7 +135,6 @@ return packer.startup(function(use)
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-cmdline",
             "saadparwaiz1/cmp_luasnip",
-            'andersevenrud/cmp-tmux',
             { "David-Kunz/cmp-npm", requires = "nvim-lua/plenary.nvim", config = function() require('config.cmp-npm') end }
         },
     })
