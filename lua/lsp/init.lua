@@ -11,7 +11,6 @@ lspconfig.tailwindcss.setup {
     filetypes = require('lsp.settings.tailwindcss').filetypes,
     init_options = require('lsp.settings.tailwindcss').init_options,
     on_attach = require('lsp.settings.tailwindcss').on_attach,
-
     settings = require('lsp.settings.tailwindcss').settings,
 }
 
@@ -65,6 +64,12 @@ lspconfig.bashls.setup {
     settings = require('lsp.settings.bashls').settings
 }
 
+lspconfig.racket_langserver.setup {
+    filetypes = { "racket", "scheme" },
+    root_dir = lspconfig.util.root_pattern(".git", "."),
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
 require('lsp.settings.rust').setup(on_attach, capabilities)
 
 lspconfig.prismals.setup {
@@ -72,9 +77,30 @@ lspconfig.prismals.setup {
     on_attach = on_attach,
 }
 
-lspconfig.racket_langserver.setup {
-    filetypes = { "racket", "scheme" },
-    root_dir = lspconfig.util.root_pattern(".git", "."),
+lspconfig.clangd.setup {
     capabilities = capabilities,
     on_attach = on_attach,
+}
+lspconfig.purescriptls.setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+lspconfig.rescriptls.setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+lspconfig.hls.setup {
+    cmd = { 'haskell-language-server-wrapper', '--lsp' },
+    settings = {
+        haskell = {
+            formatter = 'fourmolu',
+        },
+    },
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+
+lspconfig.elmls.setup {
+    capabilities = capabilities,
+    on_attach = on_attach
 }

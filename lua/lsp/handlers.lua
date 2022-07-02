@@ -48,11 +48,11 @@ M.setup = function()
     --
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
         vim.lsp.handlers.hover,
-        { border = borderchars, focusable = false }
+        { border = "single", focusable = false }
     )
     vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
         vim.lsp.handlers.signature_help,
-        { border = borderchars }
+        { border = "single" }
     )
 
 end
@@ -107,7 +107,8 @@ M.on_attach = function(client, bufnr)
     if (client.name == 'tsserver' or client.name == 'tailwindcss') then
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
-    end event = 'BufEnter'
+    end
+    event = 'BufEnter'
     if (client.name == 'tailwindcss') then
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
@@ -123,6 +124,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not status_ok then
+    print("laa")
     return
 end
 

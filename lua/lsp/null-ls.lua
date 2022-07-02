@@ -13,8 +13,10 @@ nls.setup({
         }),
 
         fmt.rustfmt,
+        -- fmt.raco_fmt.with({
+        --     filetypes = {'scheme', 'racket'}
+        -- }),
         dgn.shellcheck,
-        fmt.raco_fmt,
     },
     on_attach = on_attach,
     capabilities = capabilities

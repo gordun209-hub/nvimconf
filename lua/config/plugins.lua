@@ -68,6 +68,13 @@ return packer.startup(function(use)
         requires = { "plenary.nvim" },
     })
 
+    -- surround
+    use({
+        "kylechui/nvim-surround",
+        config = function()
+            require('config.surround')
+        end
+    })
     -- comments
     use({ "JoosepAlviste/nvim-ts-context-commentstring", after = { "nvim-treesitter" } })
     -- idk what this is
@@ -273,11 +280,15 @@ return packer.startup(function(use)
         requires = "joosepalviste/nvim-ts-context-commentstring",
         event = 'BufWinEnter',
     })
+    use 'wlangstroth/vim-racket'
     use { 'ChristianChiarulli/nvim-gps', branch = 'text_hl', config = "require('config.gps')", after = 'nvim-treesitter' }
-    use({
-        -- calc startup time
-        "dstein64/vim-startuptime",
-        cmd = "StartupTime",
-    })
+    -- org mode
+    -- use({
+    --     -- calc startup time
+    --     "dstein64/vim-startuptime",
+    --     cmd = "StartupTime",
+    -- })
+
+
 
 end)
