@@ -53,10 +53,6 @@ return packer.startup(function(use)
     -- icons for other plugins
     use({
         "kyazdani42/nvim-web-devicons",
-        config = function()
-            require("config.devicons")
-        end,
-        event = "VimEnter"
     })
     -- which key
     use { 'folke/which-key.nvim', config = function() require('config.whichkey') end, event = "BufWinEnter" }
@@ -75,6 +71,39 @@ return packer.startup(function(use)
             require('config.surround')
         end
     })
+    -- org mode
+    use {
+        "nvim-neorg/neorg",
+        config = function()
+            require('neorg').setup {
+                load = {
+                    ["core.defaults"] = {},
+                    ["core.norg.dirman"] = {
+
+                        config = {
+                            workspaces = {
+                                web = "~/notes/web",
+                                sicp = "~/notes/sicp",
+                                notes = "~/notes/notes",
+                                sicp_examples = "~/notes/sicp_ex",
+
+                            }
+                        }
+                    },
+                    ["core.norg.journal"] = {
+                        config = {
+                            workspace = "notes",
+                        },
+                    },
+                    ["core.norg.concealer"] = {},
+                    -- TODO: hook in completion engine
+                    -- ["core.norg.completion"] = {},
+                    ["core.norg.qol.toc"] = {},
+                }
+            }
+        end,
+        requires = "nvim-lua/plenary.nvim"
+    }
     -- comments
     use({ "JoosepAlviste/nvim-ts-context-commentstring", after = { "nvim-treesitter" } })
     -- idk what this is
@@ -204,7 +233,6 @@ return packer.startup(function(use)
         config = function()
             require("config.lualine")
         end,
-        event = 'BufEnter',
     })
     -- signature
     use {
@@ -280,9 +308,7 @@ return packer.startup(function(use)
         requires = "joosepalviste/nvim-ts-context-commentstring",
         event = 'BufWinEnter',
     })
-    use 'wlangstroth/vim-racket'
     use { 'ChristianChiarulli/nvim-gps', branch = 'text_hl', config = "require('config.gps')", after = 'nvim-treesitter' }
-    -- org mode
     -- use({
     --     -- calc startup time
     --     "dstein64/vim-startuptime",

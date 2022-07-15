@@ -3,7 +3,6 @@ local autocmd = vim.api.nvim_create_autocmd
 vim.api.nvim_create_autocmd("BufRead", { pattern = "*/node_modules/*", command = "lua vim.diagnostic.disable(0)" })
 vim.api.nvim_create_autocmd("BufNewFile", { pattern = "*/node_modules/*", command = "lua vim.diagnostic.disable(0)" })
 local highlight_group = vim.api.nvim_create_augroup("Highlight", { clear = true })
-
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight on yank",
   callback = function()

@@ -99,7 +99,15 @@ lspconfig.hls.setup {
     capabilities = capabilities,
     on_attach = on_attach,
 }
-
+lspconfig.ltex.setup {
+    settings = {
+        filetypes = {
+            "markdown", "org", "norg", "plaintex", "rst", "gitcommit"
+        }
+    },
+    capabilities = capabilities,
+    on_attach = on_attach
+}
 lspconfig.elmls.setup {
     capabilities = capabilities,
     on_attach = on_attach

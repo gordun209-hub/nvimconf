@@ -37,7 +37,7 @@ local options = {
     backup = false, --- Recommended by coc
     conceallevel = 0, --- Show `` in markdown files
     encoding = "utf-8", --- The encoding displayed
-    errorbells = false, --- Disables sound effect for errors
+    errorbells = false, --- Disables sound effect for err ffors
     fileencoding = "utf-8", --- The encoding written to file
     incsearch = true, --- Start searching before pressing enter
     showmode = false, --- Don't show things like -- INSERT -- anymore
@@ -102,7 +102,10 @@ opt.timeoutlen = 250
 opt.ttimeoutlen = 10
 vim.g.did_load_filetypes = 0
 vim.g.do_filetype_lua = 1
-opt.matchpairs = { "(:)", "{:}", "[:]", "<:>" }
+--opt.matchpairs = { "(:)", "{:}", "[:]", "<:>" }
+opt.fillchars = 'eob: ,fold: ,diff:⣿,vert:│'
+opt.listchars = 'tab:│ ,eol:¬,trail:~,extends:>,precedes:<,nbsp:•'
+opt.list=true
 
 
---vim.o.background = "dark"
+vim.g.sexp_filetypes = "clojure,scheme,lisp,timl,fennel,janet,hy,racket"

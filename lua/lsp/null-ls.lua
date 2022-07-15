@@ -21,3 +21,8 @@ nls.setup({
     on_attach = on_attach,
     capabilities = capabilities
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "null-ls-info",
+  callback = function() vim.api.nvim_win_set_config(0, { border = "rounded" }) end,
+})

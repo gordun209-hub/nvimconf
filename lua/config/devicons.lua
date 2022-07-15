@@ -28,6 +28,7 @@ devicons.set_icon({
         color = jsoncolor,
         name = "scheme",
     },
+    
     ["package.json"] = {
         icon = "",
         color = jsoncolor,
@@ -106,21 +107,5 @@ devicons.set_icon({
 })
 
 devicons.setup({
-    -- your personnal icons can go here (to override)
-    -- DevIcon will be appended to `name`
-    override = {
-        zsh = {
-            icon = "",
-            color = "#428850",
-            name = "Zsh",
-        },
-        scm = {
-            icon = "",
-            color = "#C84B31",
-            name = "Scheme",
-        },
-    },
-    -- globally enable default icons (default to false)
-    -- will get overriden by `get_icons` option
     default = true,
 })
