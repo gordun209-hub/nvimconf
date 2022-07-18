@@ -27,13 +27,13 @@ typescript.setup({
 
 lspconfig.eslint.setup {
     -- this line is new
-    root_dir = lspconfig.util.root_pattern(
-        '.eslintrc.js',
-        '.eslintrc.cjs',
-        '.eslintrc.yaml',
-        '.eslintrc.yml',
-        '.eslintrc.json'
-    ),
+    -- root_dir = lspconfig.util.root_pattern(
+    --     '.eslintrc.js',
+    --     '.eslintrc.cjs',
+    --     '.eslintrc.yaml',
+    --     '.eslintrc.yml',
+    --     '.eslintrc.json'
+    -- ),
     capabilities = capabilities,
     on_attach = on_attach,
     settings = require('lsp.settings.eslint').settings,
@@ -77,38 +77,38 @@ lspconfig.prismals.setup {
     on_attach = on_attach,
 }
 
-lspconfig.clangd.setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-}
-lspconfig.purescriptls.setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-}
-lspconfig.rescriptls.setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-}
-lspconfig.hls.setup {
-    cmd = { 'haskell-language-server-wrapper', '--lsp' },
-    settings = {
-        haskell = {
-            formatter = 'fourmolu',
-        },
-    },
-    capabilities = capabilities,
-    on_attach = on_attach,
-}
-lspconfig.ltex.setup {
-    settings = {
-        filetypes = {
-            "markdown", "org", "norg", "plaintex", "rst", "gitcommit"
-        }
-    },
-    capabilities = capabilities,
-    on_attach = on_attach
-}
-lspconfig.elmls.setup {
-    capabilities = capabilities,
-    on_attach = on_attach
-}
+-- lspconfig.clangd.setup {
+--     capabilities = capabilities,
+--     on_attach = on_attach,
+-- }
+-- lspconfig.purescriptls.setup {
+--     capabilities = capabilities,
+--     on_attach = on_attach,
+-- }
+-- lspconfig.rescriptls.setup {
+--     capabilities = capabilities,
+--     on_attach = on_attach,
+-- }
+-- lspconfig.hls.setup {
+--     cmd = { 'haskell-language-server-wrapper', '--lsp' },
+--     settings = {
+--         haskell = {
+--             formatter = 'fourmolu',
+--         },
+--     },
+--     capabilities = capabilities,
+--     on_attach = on_attach,
+-- }
+-- lspconfig.ltex.setup {
+--     settings = {
+--         filetypes = {
+--             "markdown", "org", "norg", "plaintex", "rst", "gitcommit"
+--         }
+--     },
+--     capabilities = capabilities,
+--     on_attach = on_attach
+-- }
+-- lspconfig.elmls.setup {
+--     capabilities = capabilities,
+--     on_attach = on_attach
+-- }

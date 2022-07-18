@@ -44,10 +44,6 @@ return packer.startup(function(use)
         "lewis6991/impatient.nvim",
     })
     -- hawli
-    use({ 'andweeb/presence.nvim', config = function() require("presence"):setup({
-            auto_update = true,
-        })
-    end, event = "BufWinEnter" })
     -- needed for other plugins to work
     use({ "nvim-lua/plenary.nvim" })
     -- icons for other plugins
@@ -133,14 +129,18 @@ return packer.startup(function(use)
     -- install lsp
     -- -- for configuration
     use({ "williamboman/nvim-lsp-installer" })
+
     use({
         "neovim/nvim-lspconfig",
         config = function()
             require("lsp")
         end,
-        event = "VimEnter"
+        event = "BufRead"
     })
-    use({ "jose-elias-alvarez/null-ls.nvim", config = function() require('lsp.null-ls') end })
+
+    use({ "jose-elias-alvarez/null-ls.nvim",
+        event = 'BufRead',
+        config = function() require('lsp.null-ls') end })
 
     use({ "b0o/schemastore.nvim", config = function() require('lsp.settings.jsonls') end })
 
@@ -171,21 +171,13 @@ return packer.startup(function(use)
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-cmdline",
             "saadparwaiz1/cmp_luasnip",
-            { "David-Kunz/cmp-npm", requires = "nvim-lua/plenary.nvim", config = function() require('config.cmp-npm') end }
+            -- { "David-Kunz/cmp-npm", requires = "nvim-lua/plenary.nvim", config = function() require('config.cmp-npm') end }
         },
     })
-    -- terminal
-    use({
-        "akinsho/nvim-toggleterm.lua",
-        config = function()
-            require("config.terminal").setup()
-        end,
-    })
     -- snippets
-    use { 'L3MON4D3/LuaSnip', requires = { 'rafamadriz/friendly-snippets' }, after = 'cmp_luasnip', wants = "friendly-snippets", }
-    -- copilot but autocomplete
-    -- copilot but lua
-    -- github copilot for autocomplete
+    use { 'L3MON4D3/LuaSnip', requires = { 'rafamadriz/friendly-snippets' }, after = 'cmp_luasnip',
+        wants = "friendly-snippets", }
+
     use({
         "github/copilot.vim",
         config = function()
@@ -194,10 +186,12 @@ return packer.startup(function(use)
     })
     -- UI PART OF PLUGINS
     -- indent line
-    use({ "lukas-reineke/indent-blankline.nvim", config = function() require('config.indentline') end, after = 'nvim-treesitter', event = 'BufRead', })
+    use({ "lukas-reineke/indent-blankline.nvim", config = function() require('config.indentline') end,
+        after = 'nvim-treesitter', event = 'BufRead', })
 
     -- bufferline
-    use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons', config = function() require('config.bufferline') end }
+    use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons',
+        config = function() require('config.bufferline') end }
 
     -- displays errors noice
     use({
@@ -308,7 +302,13 @@ return packer.startup(function(use)
         requires = "joosepalviste/nvim-ts-context-commentstring",
         event = 'BufWinEnter',
     })
-    use { 'ChristianChiarulli/nvim-gps', branch = 'text_hl', config = "require('config.gps')", after = 'nvim-treesitter' }
+    -- use { 'ChristianChiarulli/nvim-gps', branch = 'text_hl', config = "require('config.gps')", after = 'nvim-treesitter' }
+
+    use({ 'andweeb/presence.nvim', config = function() require("presence"):setup({
+            auto_update = true,
+        })
+    end, event = "BufWinEnter" })
+
     -- use({
     --     -- calc startup time
     --     "dstein64/vim-startuptime",

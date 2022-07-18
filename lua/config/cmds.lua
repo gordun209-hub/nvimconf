@@ -4,25 +4,26 @@ vim.api.nvim_create_autocmd("BufRead", { pattern = "*/node_modules/*", command =
 vim.api.nvim_create_autocmd("BufNewFile", { pattern = "*/node_modules/*", command = "lua vim.diagnostic.disable(0)" })
 local highlight_group = vim.api.nvim_create_augroup("Highlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highlight on yank",
-  callback = function()
-    vim.highlight.on_yank({ higrou = "IncSearch", timeout = 400 })
-  end,
-  group = highlight_group,
+    desc = "Highlight on yank",
+    callback = function()
+        vim.highlight.on_yank({ higrou = "IncSearch", timeout = 400 })
+    end,
+    group = highlight_group,
 })
 vim.api.nvim_create_autocmd("BufWritePre", {
-  desc = "fix all on save",
-  pattern = "*.tsx,*.ts,*.jsx,*.js",
-  command = "EslintFixAll",
-  group = highlight_group,
+    desc = "fix all on save",
+    pattern = "*.tsx,*.ts,*.jsx,*.js",
+    command = "EslintFixAll",
+    group = highlight_group,
 
 })
 
-vim.api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost" }, {
-  callback = function()
-    require("config.winbar").get_winbar()
-  end,
-})
+--vim.api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost" }, {
+
+-- callback = function()
+--   require("config.winbar").get_winbar()
+-- end,
+--})
 autocmd('BufEnter', {
     desc = 'Do not auto comment on new line',
     command = 'set fo-=c fo-=r fo-=o',
