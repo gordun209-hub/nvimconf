@@ -75,11 +75,18 @@ require('dressing').setup({
 
     -- Options for nui Menu
     nui = {
-      position = "50%",
+      -- position = "50%",
+      position = {
+        row = 1,
+        col = 0,
+      },
       size = nil,
-      relative = "editor",
+      relative = "cursor",
       border = {
         style = "rounded",
+        text= {
+          top_align = "right",
+        }
       },
       max_width = 80,
       max_height = 40,

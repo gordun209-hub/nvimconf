@@ -3,12 +3,12 @@ if not status_ok then
     return
 end
 npairs.setup {
-    enable_check_bracket_line = false,
+    --enable_check_bracket_line = false,
     check_ts = true,
-    -- ts_config = {
-    --   lua = { "string", "source" },
-    --   javascript = { "string", "template_string" },
-    -- },
+    ts_config = {
+      lua = { "string", "source" },
+      javascript = { "string", "template_string" },
+    },
      disable_filetype = { "TelescopePrompt", "spectre_panel" , "scheme"},
     -- fast_wrap = {
     --   map = "<M-e>",
@@ -23,13 +23,6 @@ npairs.setup {
     -- },
 }
 
-local cond = require('nvim-autopairs.conds')
-print(vim.inspect(cond))
-
-
-local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-local cmp_status_ok, cmp = pcall(require, "cmp")
-if not cmp_status_ok then
-    return
-end
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+local cmp = require('cmp')
+cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))

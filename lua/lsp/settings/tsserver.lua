@@ -1,3 +1,4 @@
+local navic = require("nvim-navic")
 local M = {}
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -38,12 +39,12 @@ if cmp_nvim_lsp_ok then
 end
 
 local on_attach = function(client, bufnr)
-  client.server_capabilities.documentFormattingProvider = false
-  client.server_capabilities.documentRangeFormattingProvider = false
+  -- client.server_capabilities.documentFormattingProvider = false
+  -- client.server_capabilities.documentRangeFormattingProvider = false
 --  client.server_capabilities.document_formatting = false
 --  client.server_capabilities.document_range_formatting = false
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
+navic.attach(client, bufnr)
   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 end
 

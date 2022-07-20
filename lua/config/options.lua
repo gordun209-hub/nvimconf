@@ -33,9 +33,11 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- Decrease update time
-vim.o.updatetime = 250
-vim.wo.signcolumn = "yes"
+vim.o.updatetime = 100
+vim.wo.signcolumn = "yes:2"
 
+
+-- Use filetype.lua instead
 -- Decrease redraw time
 vim.o.redrawtime = 100
 
@@ -93,8 +95,8 @@ vim.o.splitright = true
 --vim.o.showmatch = true
 
 -- Use filetype.lua instead
-vim.g.do_filetype_lua = 1
-vim.g.did_load_filetypes = 0
+--vim.g.do_filetype_lua = 1
+--vim.g.did_load_filetypes = 0
 
 -- Hide show current mode on status line
 vim.o.showmode = false
@@ -113,7 +115,7 @@ vim.o.sidescrolloff = 5
 -- Ignore case when completing file names and directories.
 vim.o.wildmenu = true
 vim.o.wildignorecase = true
-vim.opt.wildignore = vim.opt.wildignore + { '*/node_modules/*', '*/.git/*', '*/vendor/*' }
+--vim.opt.wildignore = vim.opt.wildignore + { '*/node_modules/*', '*/.git/*', '*/vendor/*' }
 
 vim.opt.laststatus = 3
 
@@ -122,8 +124,8 @@ vim.o.ttimeout = true
 vim.o.ttimeoutlen = 5
 
 -- Timeout on mapped sequences
-vim.o.timeout = true
-vim.o.timeoutlen = 300
+-- vim.o.timeout = true
+vim.o.timeoutlen = 200
 -- editing exp
 vim.o.expandtab = true
 
@@ -131,17 +133,17 @@ vim.o.expandtab = true
 
 vim.o.list = true
 -- Makes neovim and host OS clipboard play nicely with each other
-vim.o.clipboard = 'unnamedplus'
+vim.o.clipboard = 'unnamedplus,unnamed,unnamed'
 
 vim.o.listchars = 'trail:·,nbsp:◇,tab:→ ,extends:▸,precedes:◂'
 -- Show (partial) command in status line
 vim.o.showcmd = false
 
 -- Configure the number of spaces a tab is counting for
-vim.o.tabstop = 4
+vim.o.tabstop = 2
 
 -- Number of spaces for a step of indent
-vim.o.shiftwidth = 4
+vim.o.shiftwidth = 2
 
 -- Folding
 vim.o.foldenable = true
@@ -159,47 +161,47 @@ vim.o.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 
 
 local globals = {
-	dashboard_default_executive = "telescope", --- Use fuzzy search plugin in dashboard
-	mapleader = " ", --- Map leader key to SPC
+  dashboard_default_executive = "telescope", --- Use fuzzy search plugin in dashboard
+  mapleader = " ", --- Map leader key to SPC
 }
 
 
 for k, v in pairs(globals) do
-	vim.g[k] = v
+  vim.g[k] = v
 end
 
 -- disable some unused options
 local disabled_built_ins = {
-	"2html_plugin",
-	"bugreport",
-	"compiler",
-	"ftplugin",
-	"getscript",
-	"getscriptPlugin",
-	"gzip",
-	"logipat",
-	"matchit",
-	"netrw",
-	"netrwFileHandlers",
-	"netrwPlugin",
-	"netrwSettings",
-	"optwin",
-	"rplugin",
-	"rrhelper",
-	"spellfile_plugin",
-	"synmenu",
-	"syntax",
-	"tar",
-	"tarPlugin",
-	"tutor",
-	"vimball",
-	"vimballPlugin",
-	"zip",
-	"zipPlugin",
+  "2html_plugin",
+  "bugreport",
+  "compiler",
+  "ftplugin",
+  "getscript",
+  "getscriptPlugin",
+  "gzip",
+  "logipat",
+  "matchit",
+  "netrw",
+  "netrwFileHandlers",
+  "netrwPlugin",
+  "netrwSettings",
+  "optwin",
+  "rplugin",
+  "rrhelper",
+  "spellfile_plugin",
+  "synmenu",
+  "syntax",
+  "tar",
+  "tarPlugin",
+  "tutor",
+  "vimball",
+  "vimballPlugin",
+  "zip",
+  "zipPlugin",
 }
 
 for _, plugin in pairs(disabled_built_ins) do
-	vim.g["loaded_" .. plugin] = 1
+  vim.g["loaded_" .. plugin] = 1
 end
 
 vim.wo.colorcolumn = "80"

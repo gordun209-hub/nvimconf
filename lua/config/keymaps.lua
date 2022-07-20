@@ -4,6 +4,7 @@ local term_opts = { silent = true }
 
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
+local lsp_keymap = vim.keymap.set
 local new_keymap = vim.keymap.set
 --Remap space as leader key
 vim.g.mapleader = " "
@@ -116,3 +117,54 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.cmd("highlight LirDir ctermfg=109")
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)
+
+-- keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", silent)
+-- keymap("n", "gr", "<cmd>lua vim.lsp.buf.references({ includeDeclaration = false })<CR>", silent)
+-- keymap("n", "<C-Space>", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
+-- keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
+-- keymap("v", "<leader>ca", "<cmd>'<,'>lua vim.lsp.buf.range_code_action()<CR>", silent)
+-- keymap("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", silent)
+-- keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.format({async = true})<CR>", silent)
+-- --keymap("v", "<leader>cf", "<cmd>'<.'>lua vim.lsp.buf.range_formatting()<CR>", silent)
+-- keymap("n", "<leader>cl", "<cmd>lua vim.diagnostic.open_float({ border = 'rounded', max_width = 100 })<CR>", silent)
+-- keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", silent)
+-- keymap("n", "L", "<cmd>lua vim.lsp.buf.signature_help()<CR>", silent)
+-- keymap("n", "]g", "<cmd>lua vim.diagnostic.goto_next({ float = { border = 'rounded', max_width = 100 }})<CR>", silent)
+-- keymap("n", "[g", "<cmd>lua vim.diagnostic.goto_prev({ float = { border = 'rounded', max_width = 100 }})<CR>", silent)
+
+
+-- vim.keymap.set('n', '<space>e', vim.diagnostic.open_float({ border = 'rounded', max_width = 100 }), silent)
+-- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, silent)
+-- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, silent)
+-- vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, silent)
+--
+-- vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, silent)
+-- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, silent)
+-- vim.keymap.set('n', 'K', vim.lsp.buf.hover, silent)
+-- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, silent)
+-- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, silent)
+-- vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, silent)
+-- vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, silent)
+-- vim.keymap.set('n', '<space>wl', function()
+--   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+-- end, silent)
+-- vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, silent)
+-- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, silent)
+-- vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, silent)
+-- vim.keymap.set('n', 'gr', vim.lsp.buf.references, silent)
+-- vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, silent)
+
+-- LSP
+lsp_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", silent)
+lsp_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references({ includeDeclaration = false })<CR>", silent)
+lsp_keymap("n", "<C-a>", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
+lsp_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
+lsp_keymap("v", "<leader>ca", "<cmd>'<,'>lua vim.lsp.buf.range_code_action()<CR>", silent)
+lsp_keymap("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", silent)
+lsp_keymap("n", "<leader>fa", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", silent)
+lsp_keymap("v", "<leader>cf", "<cmd>'<.'>lua vim.lsp.buf.range_formatting()<CR>", silent)
+lsp_keymap("n", "<leader>cl", "<cmd>lua vim.diagnostic.open_float({ border = 'rounded', max_width = 100 })<CR>", silent)
+lsp_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", silent)
+lsp_keymap("n", "L", "<cmd>lua vim.lsp.buf.signature_help()<CR>", silent)
+lsp_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next({ float = { border = 'rounded', max_width = 100 }})<CR>", silent)
+lsp_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev({ float = { border = 'rounded', max_width = 100 }})<CR>", silent)

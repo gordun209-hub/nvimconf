@@ -15,7 +15,8 @@ M.settings = {
       location = "separateLine"
     },
     showDocumentation = {
-      enable = true
+      enable = true,
+      mode = "all"
     }
   },
   codeActionOnSave = {
