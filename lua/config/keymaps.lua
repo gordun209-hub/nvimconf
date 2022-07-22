@@ -102,11 +102,8 @@ vim.api.nvim_set_keymap("n", "<leader>tq", "<cmd>Trouble quickfix<cr>", { silent
 vim.api.nvim_set_keymap("n", "<leader>tr", "<cmd>Trouble lsp_references<cr>", { silent = true, noremap = true })
 
 -- Show package versions
--- vim.api.nvim_set_keymap("n", "<leader>ns", ":lua require('package-info').show()<CR>", { silent = true, noremap = true })
---
--- -- Hide package versions
--- vim.api.nvim_set_keymap("n", "<leader>nc", ":lua require('package-info').hide()<CR>", { silent = true, noremap = true })
 
+-- Show dependency versions
 -- spectre
 
 new_keymap("n", "<Leader>pr", "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", silent)
@@ -117,7 +114,12 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.cmd("highlight LirDir ctermfg=109")
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)
-
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>ni",
+    "<cmd>lua require('package-info').install()<cr>",
+    { silent = true, noremap = true }
+)
 -- keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", silent)
 -- keymap("n", "gr", "<cmd>lua vim.lsp.buf.references({ includeDeclaration = false })<CR>", silent)
 -- keymap("n", "<C-Space>", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)

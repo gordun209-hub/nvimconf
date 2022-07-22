@@ -1,10 +1,13 @@
 local typescript_ok, typescript = pcall(require, 'typescript')
-local present3, navic = pcall(require, "nvim-navic")
 require("lsp.lsp-installer") -- this installs servers
 require("lsp.handlers").setup() -- this exposes handlers
 local lspconfig = require("lspconfig")
 require("lsp.lsp-signatures")
-
+local util = require("lspconfig.util")
+local handlers = {
+  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", width = 60 }),
+  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded", widht = 60 })
+}
 local on_attach = require('lsp.handlers').on_attach
 local capabilities = require('lsp.handlers').capabilities
 if typescript_ok then
@@ -15,6 +18,7 @@ if typescript_ok then
     server = {
       capabilities = require('lsp.settings.tsserver').capabilities,
       on_attach = require('lsp.settings.tsserver').on_attach,
+      handlers = handlers
     }
   })
 end
@@ -32,9 +36,20 @@ lspconfig.eslint.setup {
   capabilities = capabilities,
   on_attach = require('lsp.settings.eslint').on_attach,
   settings = require('lsp.settings.eslint').settings,
+  handlers = handlers,
+  root_dir = util.root_pattern(
+    ".eslintrc.js",
+    ".eslintrc.cjs",
+    ".eslintrc.yaml",
+    ".eslintrc.yml",
+    ".eslintrc.json",
+    "package.json"
+  ),
+
 }
 
 lspconfig.sumneko_lua.setup {
+  handlers = handlers,
   on_attach = on_attach,
   settings = require('lsp.settings.sumneko-lua').settings,
   capabilities = capabilities
@@ -42,18 +57,21 @@ lspconfig.sumneko_lua.setup {
 
 lspconfig.html.setup {
   capabilities = capabilities,
+  handlers = handlers,
   on_attach = on_attach,
   settings = require('lsp.settings.html').settings,
 }
 lspconfig.emmet_ls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
+  handlers = handlers,
   settings = require('lsp.settings.emmet-ls').settings,
 }
 
 lspconfig.bashls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
+  handlers = handlers,
   settings = require('lsp.settings.bashls').settings
 }
 
@@ -61,6 +79,7 @@ lspconfig.racket_langserver.setup {
   filetypes = { "racket", "scheme" },
   root_dir = lspconfig.util.root_pattern(".git", "."),
   capabilities = capabilities,
+  handlers = handlers,
   on_attach = on_attach,
 }
 --require('lsp.settings.rust').setup(on_attach, capabilities)
@@ -68,6 +87,7 @@ lspconfig.racket_langserver.setup {
 lspconfig.prismals.setup {
   capabilities = capabilities,
   on_attach = on_attach,
+  handlers = handlers,
 }
 
 -- lspconfig.clangd.setup {

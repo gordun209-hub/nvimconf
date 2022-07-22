@@ -1,6 +1,3 @@
-
-
-
 require('package-info').setup
     {
       colors = {
@@ -23,7 +20,7 @@ require('package-info').setup
       -- The plugin will try to auto-detect the package manager based on
       -- `yarn.lock` or `package-lock.json`. If none are found it will use the
       -- provided one,                              if nothing is provided it will use `yarn`
-      package_manager = 'yarn'
+      package_manager = 'npm'
     }
 
 -- Keymappings are set in which key config

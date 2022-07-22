@@ -3,7 +3,6 @@ if not cmp_status_ok then
   print("cmp broke")
   return
 end
-
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
   print("luasnipo broke")
@@ -44,8 +43,7 @@ local icons = {
   Operator = "",
   TypeParameter = "",
 }
-local kind_icons = icons
-
+local kinds = icons
 
 
 local buffer_option = {
@@ -67,7 +65,9 @@ cmp.setup {
       luasnip.lsp_expand(args.body) -- For `luasnip` users.
     end,
   },
-
+  view = {
+    entries = "custom",
+  },
   mapping = cmp.mapping.preset.insert {
     ["<C-k>"] = cmp.mapping.select_prev_item(),
     ["<C-j>"] = cmp.mapping.select_next_item(),
@@ -111,27 +111,15 @@ cmp.setup {
       "s",
     }),
   },
-  formatting = {
-    fields = { "kind", "abbr", "menu" },
-    format = function(entry, vim_item)
-      -- Kind icons
-      vim_item.kind = kind_icons[vim_item.kind]
-      -- NOTE: order matters
-      vim_item.menu = ({
-        nvim_lsp = "",
-        nvim_lua = "",
-        luasnip = "",
-        npm = "",
-        calc = "",
-        zsh = "",
-        buffer = "",
-        path = "",
-      })[entry.source.name]
-      vim_item.abbr = string.sub(vim_item.abbr, 1, 50)
-      return vim_item
-    end,
-  },
+ formatting = {
+        fields = { "kind", "abbr", "menu" },
+        format = function(_, vim_item)
+            vim_item.menu = vim_item.kind
+            vim_item.kind = kinds[vim_item.kind]
 
+            return vim_item
+        end,
+    },
   sources = {
     { name = 'nvim_lsp', priority = 9 },
     { name = 'npm', priority = 9 },
@@ -164,8 +152,9 @@ cmp.setup {
       winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
     },
     completion = {
-      border = "rounded",
-      winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
+      completeopt = "menuone,noinsert,noselect",
+      keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
+      keyword_length = 1,
     },
   },
 

@@ -13,6 +13,13 @@ nls.setup({
     }),
 
     fmt.rustfmt,
+    fmt.fixjson,
+    fmt.shfmt,
+    dgn.shellcheck.with({diagnostics_format = '#{m} [#{c}]'}),
+    dgn.zsh,
+ dgn.jsonlint,
+    dgn.markdownlint,
+
     -- fmt.raco_fmt.with({
     --     filetypes = {'scheme', 'racket'}
     -- }),

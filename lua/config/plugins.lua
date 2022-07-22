@@ -18,9 +18,9 @@ end
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
 local packer_group = vim.api.nvim_create_augroup("Packer", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePost", {
-    command = "source <afile> | PackerSync",
-    group = packer_group,
-    pattern = "plugins.lua",
+  command = "source <afile> | PackerSync",
+  group = packer_group,
+  pattern = "plugins.lua",
 })
 
 local status_ok, packer = pcall(require, "packer")
@@ -43,7 +43,7 @@ return packer.startup(function(use)
   use({
     "lewis6991/impatient.nvim",
   })
-  use { 'nathom/filetype.nvim' } 
+  use { 'nathom/filetype.nvim' }
   -- hawli
   -- needed for other plugins to work
   use({ "nvim-lua/plenary.nvim" })
@@ -83,6 +83,7 @@ return packer.startup(function(use)
     "nvim-telescope/telescope.nvim",
     requires = {
       "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-node-modules.nvim",
       "nvim-telescope/telescope-project.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
       "nvim-telescope/telescope-file-browser.nvim"
@@ -104,7 +105,10 @@ return packer.startup(function(use)
       require("lsp")
     end,
   })
-  use { 'vuki656/package-info.nvim', event = "BufEnter package.json", config = "require('config.package-info')" }
+  -- use { 'vuki656/package-info.nvim', requires = "MunifTanjim/nui.nvim",
+  --   config = function() require("config.package-info") end }
+
+
   use({ "jose-elias-alvarez/null-ls.nvim",
     config = function() require('lsp.null-ls') end })
   use({ 'hrsh7th/nvim-cmp', config = function() require('config.cmp') end })
@@ -188,11 +192,11 @@ return packer.startup(function(use)
       require("config.lualine").setup()
     end,
   })
-  
-	use({
-		"SmiteshP/nvim-navic",
-		requires = "neovim/nvim-lspconfig",
-	})
+
+  use({
+    "SmiteshP/nvim-navic",
+    requires = "neovim/nvim-lspconfig",
+  })
   -- signature
   use {
     'ray-x/lsp_signature.nvim',
